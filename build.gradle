@@ -30,9 +30,21 @@ dependencies {
 // Define the main class for the application
 mainClassName = 'ohtu.ohtuvarasto.Main'
 
+plugins {
+    id 'com.github.kt3k.coveralls' version '2.8.1'
+}
+
 jar {
     manifest {
         attributes 'Main-Class': 'ohtu.ohtuvarasto.Main'
     }
 }
+
 apply plugin: "jacoco"
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
+}
