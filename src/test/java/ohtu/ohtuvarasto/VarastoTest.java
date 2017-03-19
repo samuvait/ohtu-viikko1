@@ -64,5 +64,70 @@ public class VarastoTest {
         // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
     }
+    
+    @Test
+    public void luominenTayteen() {
+        Varasto uusi = new Varasto(10, 10);
+        assertEquals(10, uusi.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void luominenNegatiivisella() {
+        Varasto uusi = new Varasto(10, -2);
+        assertEquals(0, uusi.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void luominenLiianSuurella() {
+        Varasto uusi = new Varasto(10, 11);
+        assertEquals(10, uusi.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void luominenNollallaSaldoNolla() {
+        Varasto uusi = new Varasto(0, 0);
+        assertEquals(0, uusi.getTilavuus(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void luominenNollalla() {
+        Varasto uusi = new Varasto(0);
+        assertEquals(0, uusi.getTilavuus(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void lisaaminenNegatiivisella() {
+        Varasto uusi = new Varasto(10, 5);
+        uusi.lisaaVarastoon(-2);
+        assertEquals(5, uusi.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void lisaaminenYliRajojen() {
+        Varasto uusi = new Varasto(10, 5);
+        uusi.lisaaVarastoon(7);
+        assertEquals(10, uusi.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void ottaminenNegatiivisella() {
+        Varasto uusi = new Varasto(10, 5);
+        double otettu = uusi.otaVarastosta(-3);
+        assertEquals(0, otettu, vertailuTarkkuus);
+    }
 
+    @Test
+    public void ottaminenYliRajojen() {
+        Varasto uusi = new Varasto(10, 5);
+        double otettu = uusi.otaVarastosta(10);
+        assertEquals(5, otettu, vertailuTarkkuus);
+    }
+    
+    @Test
+    public void tekstiOikein() {
+        Varasto uusi = new Varasto(10, 5);
+        String haluttu = "saldo = 5, vielä tilaa 5";
+        String tulos = uusi.toString();
+        assertTrue(tulos.contains("saldo = 5") && tulos.contains("tilaa 5"));
+    }
 }
