@@ -3,5 +3,8 @@ language: java
 before_install:
  - chmod +x gradlew
 
+script:
+  - ./gradlew clean build -i --continue
+
 after_success:
 - ./gradlew jacocoTestReport coveralls
