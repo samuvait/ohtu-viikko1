@@ -128,6 +128,7 @@ public class VarastoTest {
         Varasto uusi = new Varasto(10, 5);
         String haluttu = "saldo = 5, vielä tilaa 5";
         String tulos = uusi.toString();
-        assertTrue(tulos.contains("saldo = 5") && tulos.contains("tilaa 5"));
+        assertTrue(tulos.equals(haluttu));
+//        assertTrue(tulos.contains("saldo = 5") && tulos.contains("tilaa 5"));
     }
 }
